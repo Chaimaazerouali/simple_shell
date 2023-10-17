@@ -1,4 +1,5 @@
-#define _SHELL_H
+#ifndef _SHEEL_H
+#define _SHEEL_H
 
 #include <stdio.h> /* for printf */
 #include <unistd.h> /* for fork, execve */
