@@ -27,10 +27,12 @@ return (0);
 }
 
 /**
-* handleCtrlC - Handles the SIGINT signal (Ctrl+C).
-* @opr: Signal number (unused parameter).
+* handleCtrlC - print the prompt in a new line
+* when Handles the SIGINT signal (Ctrl+C).
+* @UNUSED: option of the prototype
+* Return: void
 */
-void handleCtrlC(int opr UNUSED)
+void handleCtrlC(int operation UNUSED)
 {
 printToStdout("\n");
 printToStdout(PROMPT_MSG);

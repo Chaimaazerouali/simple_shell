@@ -9,10 +9,10 @@ int strLength(char *str)
 {
 int length = 0;
 
-if (str == NULL)
+if (!str)
 return (0);
 
-while (str[length] != '\0')
+while (*str++)
 {
 length++;
 }
@@ -27,29 +27,18 @@ return (length);
 char *strDuplicate(char *str)
 {
 char *result;
-int length, i;
-
+int length = 0;
 if (str == NULL)
 return (NULL);
-
-length = strLength(str) + 1;
-result = malloc(sizeof(char) * length);
-
-if (result == NULL)
-{
-errno = (ENOMEM);
-perror("Error");
+while (*str++)
+length++;
+result = malloc(sizeof(char) * (length + 1));
+if (!result)
 return (NULL);
-}
-
-for (i = 0; i < length; i++)
-{
-result[i] = str[i];
-}
-
+for (length++; length--;)
+result[length] = *--str;
 return (result);
 }
-
 /**
 * strCompare - Compare two strings.
 * @str1: String one, or the shorter.
@@ -97,40 +86,13 @@ return (1);
 */
 char *strConcat(char *str1, char *str2)
 {
-char *result;
-int length1 = 0, length2 = 0;
+char *result = str1;
 
-if (str1 == NULL)
-str1 = "";
-length1 = strLength(str1);
-
-if (str2 == NULL)
-str2 = "";
-length2 = strLength(str2);
-
-result = malloc(sizeof(char) * (length1 + length2 + 1));
-if (result == NULL)
-{
-errno = ENOMEM;
-perror("Error");
-return (NULL);
-}
-
-
-for (length1 = 0; str1[length1] != '\0'; length1++)
-{
-result[length1] = str1[length1];
-}
-free(str1);
-
-
-for (length2 = 0; str2[length2] != '\0'; length2++)
-{
-result[length1] = str2[length2];
-length1++;
-}
-
-result[length1] = '\0';
+while (*str1)
+str1++;
+while (*str2)
+*str1++ = *str2++;
+*str1 = *str2;
 return (result);
 }
 
